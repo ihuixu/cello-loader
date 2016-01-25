@@ -1,5 +1,5 @@
-
-exports.loader = function(hostPath, debug){
+var loader = {}
+loader.loader = function loader(hostPath, debug){
 	return function(mainPath, opts){
 		var filePath = debug ? 'src' : 'dist'
 		var tags = []
@@ -13,3 +13,4 @@ exports.loader = function(hostPath, debug){
 	} 
 }
 
+module.exports = loader 
