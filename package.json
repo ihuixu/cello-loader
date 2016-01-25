@@ -1,4 +1,10 @@
 {
   "name": "cello-loader",
-  "version": "0.0.3"
+	"description": "cello-server loader",
+  "version": "0.0.4",
+	"author": {
+    "name": "huixu",
+    "email": "xh1021@vip.qq.com"
+  },
+	"main": "loader.js"
 }
