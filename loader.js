@@ -1,5 +1,6 @@
 function loader(hostPath, debug){
-	return function(mainPath, opts){
+
+	function loadJS(mainPath, opts){
 		var filePath = debug ? 'src' : 'dist'
 		var tags = []
 		tags.push('<script src="' + hostPath + filePath + '/' + 'loader.js' + '" data-main="' + mainPath + '"></script>')
@@ -9,6 +10,22 @@ function loader(hostPath, debug){
 		tags.push('<script src="' + hostPath + filePath + ((opts.depends && opts.depends.length) ? '~'+opts.depends.join(',') : '') + '/' + mainPath +'.js' + '"></script>')	
 
 		return tags.join('')
+	}
+
+	function loadCSS(fileList, opts){
+		var filePath = 'css'
+		var tags = []
+		fileList.map(function(v){
+			tags.push('<link rel="stylesheet" type="text/css" href="' + hostPath + filepath + '/' + v + '.css" />')
+		})
+
+		return tags.join('')
+	}
+
+
+	return {
+		loadJS : loadJS 
+		, loadCSS : loadCSS 
 	} 
 }
 
