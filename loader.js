@@ -1,5 +1,4 @@
-var loader = {}
-loader.loader = function(hostPath, debug){
+function loader(hostPath, debug){
 	return function(mainPath, opts){
 		var filePath = debug ? 'src' : 'dist'
 		var tags = []
