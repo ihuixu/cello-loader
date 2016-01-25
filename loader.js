@@ -16,7 +16,7 @@ function loader(hostPath, debug){
 		var filePath = 'css'
 		var tags = []
 		fileList.map(function(v){
-			tags.push('<link rel="stylesheet" type="text/css" href="' + hostPath + filepath + '/' + v + '.css" />')
+			tags.push('<link rel="stylesheet" type="text/css" href="' + hostPath + filePath + '/' + v + '.css" />')
 		})
 
 		return tags.join('')
