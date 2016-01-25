@@ -2,5 +2,5 @@
 
 ### 用法 
 ```
-<%- loader(JCSTATIC_BASE, 'page/demo', {depends:['jquery']}) %>
+<%- loader(JCSTATIC_BASE, 'page/demo', {depends:['jquery'], debug:true}) %>
 ```
