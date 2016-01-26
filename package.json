@@ -1,14 +1,14 @@
 {
   "name": "cello-loader",
-	"description": "cello-server loader",
-  "version": "0.0.9",
-	"repository": {
+  "description": "cello-server loader",
+  "version": "0.0.10",
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/xh1021/cello-loader.git"
   },
-	"author": {
+  "author": {
     "name": "huixu",
     "email": "xh1021@vip.qq.com"
   },
-	"main": "loader.js"
+  "main": "loader.js"
 }
