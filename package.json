@@ -2,6 +2,10 @@
   "name": "cello-loader",
 	"description": "cello-server loader",
   "version": "0.0.9",
+	"repository": {
+    "type": "git",
+    "url": "git+https://github.com/xh1021/cello-loader.git"
+  },
 	"author": {
     "name": "huixu",
     "email": "xh1021@vip.qq.com"
