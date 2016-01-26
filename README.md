@@ -17,6 +17,8 @@ var loaderFn = loader(config.JCSTATIC_BASE, config.debug)
 ```
 
 ```
-<%- loaderFn.loadJS('page/demo', {depends:['jquery'], debug:true}) %>
-<%- loaderFn.loadCSS(['cssresetm'], {debug:true}) %>
+<%- loaderFn.loadJS('page/demo', {depends:['jquery']}) %>
+<%- loaderFn.loadSingleJS('page/demo', {depends:['jquery']}) %>
+
+<%- loaderFn.loadCSS(['cssresetm']) %>
 ```
