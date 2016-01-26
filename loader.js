@@ -1,6 +1,7 @@
 function loader(hostPath, debug){
 
 	function loadJS(mainPath, opts){
+		opts = opts || {}
 		var filePath = debug ? 'src' : 'dist'
 		var tags = []
 		tags.push('<script src="' + hostPath + filePath + '/' + 'loader.js' + '" data-main="' + mainPath + '"></script>')
