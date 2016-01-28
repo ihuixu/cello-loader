@@ -1,20 +1,30 @@
-function loader(hostPath, debug){
+function loader(config){
+	console.log(config)
+	var hostPath = config.JCSTATIC_BASE
+	var isDebug = config.isDebug
+
 	function loadSingleJS(mainPath, opts){
 		return loadJS(mainPath, opts, true)
 	}
 
 	function loadJS(mainPath, opts, single){
 		opts = opts || {}
-		var filePath = debug ? 'src' : 'dist'
+		var filePath = isDebug ? 'src' : 'dist'
 		var tags = []
 
-		!single && tags.push('<script src="' + hostPath + filePath + '/' + 'loader.js' + '" data-main="' + mainPath + '"></script>')
+		if(!single){ 
+			tags.push('<script src="' + hostPath + filePath + '/' + 'loader.js' + '" data-main="' + mainPath + '"></script>')
+
+			config.depends.global && config.depends.global.map(function(v){
+				tags.push('<script src="' + hostPath + filePath + '/' + v +'.js' + '"></script>')	
+			})
+		}
 
 		opts.depends && opts.depends.map(function(v){
 			tags.push('<script src="' + hostPath + filePath + '/' + v +'.js' + '"></script>')	
 		})
 
-		tags.push('<script src="' + hostPath + filePath + ((opts.depends && opts.depends.length) ? '~'+opts.depends.join(',') : '') + '/' + mainPath +'.js' + '"></script>')	
+		tags.push('<script src="' + hostPath + filePath + '/' + mainPath +'.js' + '"></script>')	
 
 		return tags.join('')
 	}
