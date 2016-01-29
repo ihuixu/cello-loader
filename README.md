@@ -12,13 +12,13 @@
 
 ```
 var loader = require('cello-loader')
-var config = require('config/site.json')
-var loaderFn = loader(config.JCSTATIC_BASE, config.debug)
+var config = require('config/static.json')
+var loaderFn = loader(config)
 ```
 
 ```
-<%- loaderFn.loadJS('page/demo', {depends:['jquery']}) %>
-<%- loaderFn.loadSingleJS('page/demo', {depends:['jquery']}) %>
+<%- loaderFn.load() %>
 
+<%- loaderFn.loadJS(['a', 'page/flash/back'], {depends:['jquery']}) %>
 <%- loaderFn.loadCSS(['cssresetm']) %>
 ```

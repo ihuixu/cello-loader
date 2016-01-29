@@ -15,6 +15,7 @@ module.exports = function(config){
 	}
 
 	function loadJS(fileList, opts){
+		opts = opts || {}
 		var filePath = isDebug ? 'src' : 'dist'
 		var runModuleNames = [] 
 		var tags = []
@@ -34,6 +35,7 @@ module.exports = function(config){
 	}
 
 	function loadCSS(fileList, opts){
+		opts = opts || {}
 		var filePath = 'css'
 		var tags = []
 		fileList.map(function(v){
