@@ -1,30 +1,34 @@
-function loader(config){
-	console.log(config)
+module.exports = function(config){
 	var hostPath = config.JCSTATIC_BASE
 	var isDebug = config.isDebug
 
-	function loadSingleJS(mainPath, opts){
-		return loadJS(mainPath, opts, true)
-	}
-
-	function loadJS(mainPath, opts, single){
-		opts = opts || {}
+	function load(){
 		var filePath = isDebug ? 'src' : 'dist'
 		var tags = []
+		tags.push('<script src="' + hostPath + filePath + '/' + 'loader.js"></script>')
 
-		if(!single){ 
-			tags.push('<script src="' + hostPath + filePath + '/' + 'loader.js' + '" data-main="' + mainPath + '"></script>')
+		config.depends.global && config.depends.global.map(function(v){
+			tags.push('<script src="' + hostPath + filePath + '/' + v +'.js"></script>')	
+		})
 
-			config.depends.global && config.depends.global.map(function(v){
-				tags.push('<script src="' + hostPath + filePath + '/' + v +'.js' + '"></script>')	
-			})
-		}
+		return tags.join('')
+	}
+
+	function loadJS(fileList, opts){
+		var filePath = isDebug ? 'src' : 'dist'
+		var runModules = [] 
+		var tags = []
 
 		opts.depends && opts.depends.map(function(v){
 			tags.push('<script src="' + hostPath + filePath + '/' + v +'.js' + '"></script>')	
 		})
 
-		tags.push('<script src="' + hostPath + filePath + '/' + mainPath +'.js' + '"></script>')	
+		fileList.map(function(v){
+			tags.push('<script src="' + hostPath + filePath + '/' + v +'.js' + '"></script>')	
+			runModules.push('runModule("' + v + '");')
+		})
+
+		tags.push('<script>' + runModules.join('') + '</script>')
 
 		return tags.join('')
 	}
@@ -41,10 +45,9 @@ function loader(config){
 
 
 	return {
-		loadJS : loadJS 
-		, loadSingleJS : loadSingleJS
+		load : load 
+		, loadJS : loadJS 
 		, loadCSS : loadCSS 
 	} 
 }
 
-module.exports = loader 
