@@ -13,25 +13,24 @@ module.exports = function(config){
 
 		return tags.join('')
 	}
-
-	function loadJS(fileList, opts){
+	function loadSingleJS(fileList, opts){
 		opts = opts || {}
 		var filePath = isDebug ? 'src' : 'dist'
-		var runModuleNames = [] 
 		var tags = []
-
-		opts.depends && opts.depends.map(function(v){
-			tags.push('<script src="' + hostPath + filePath + '/' + v +'.js' + '"></script>')	
-		})
 
 		fileList.map(function(v){
 			tags.push('<script src="' + hostPath + filePath + '/' + v +'.js' + '"></script>')	
-			runModuleNames.push(v) 
 		})
 
-		tags.push('<script>cello.runModules(' + JSON.stringify(runModuleNames) + ');</script>')
-
 		return tags.join('')
+	}
+
+	function loadJS(fileList, opts){
+		opts = opts || {}
+		var jss = loadSingleJS(fileList, opts)
+		var runs = '<script>cello.runModules(' + JSON.stringify(fileList) + ');</script>'
+
+		return jss + runs 
 	}
 
 	function loadCSS(fileList, opts){
@@ -49,6 +48,7 @@ module.exports = function(config){
 	return {
 		load : load 
 		, loadJS : loadJS 
+		, loadSingleJS : loadSingleJS
 		, loadCSS : loadCSS 
 	} 
 }
