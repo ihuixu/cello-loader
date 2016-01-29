@@ -29,7 +29,7 @@ module.exports = function(config){
 			runModuleNames.push(v) 
 		})
 
-		tags.push('<script>runModules(' + JSON.stringify(runModuleNames) + ');</script>')
+		tags.push('<script>cello.runModules(' + JSON.stringify(runModuleNames) + ');</script>')
 
 		return tags.join('')
 	}
