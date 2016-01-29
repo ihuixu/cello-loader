@@ -16,7 +16,7 @@ module.exports = function(config){
 
 	function loadJS(fileList, opts){
 		var filePath = isDebug ? 'src' : 'dist'
-		var runModules = [] 
+		var runModuleNames = [] 
 		var tags = []
 
 		opts.depends && opts.depends.map(function(v){
@@ -25,10 +25,10 @@ module.exports = function(config){
 
 		fileList.map(function(v){
 			tags.push('<script src="' + hostPath + filePath + '/' + v +'.js' + '"></script>')	
-			runModules.push('runModule("' + v + '");')
+			runModuleNames.push(v) 
 		})
 
-		tags.push('<script>' + runModules.join('') + '</script>')
+		tags.push('<script>runModules(' + JSON.stringify(runModuleNames) + ');</script>')
 
 		return tags.join('')
 	}
