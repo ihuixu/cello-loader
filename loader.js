@@ -1,14 +1,16 @@
 module.exports = function(config){
 	var hostPath = config.JCSTATIC_BASE
 	var isDebug = config.isDebug
+	var now = new Date()
+	var version = [now.getFullYear(), now.getMonth()+1, now.getDay()].join('') + config.version
 
 	function load(){
 		var filePath = isDebug ? 'src' : 'dist'
 		var tags = []
-		tags.push('<script src="' + hostPath + filePath + '/' + 'loader.js"></script>')
+		tags.push('<script src="' + hostPath + filePath + '/' + 'loader.js?'+ version+'"></script>')
 
 		config.depends.global && config.depends.global.map(function(v){
-			tags.push('<script src="' + hostPath + filePath + '/' + v +'.js"></script>')	
+			tags.push('<script src="' + hostPath + filePath + '/' + v +'.js?'+ version+'"></script>')	
 		})
 
 		return tags.join('')
@@ -19,7 +21,7 @@ module.exports = function(config){
 		var tags = []
 
 		fileList.map(function(v){
-			tags.push('<script src="' + hostPath + filePath + '/' + v +'.js' + '"></script>')	
+			tags.push('<script src="' + hostPath + filePath + '/' + v +'.js?'+ version+'"></script>')	
 		})
 
 		return tags.join('')
