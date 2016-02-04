@@ -5,7 +5,7 @@ module.exports = function(config){
 	var version = [now.getFullYear(), now.getMonth()+1, now.getDay()].join('') + config.version
 
 	function load(){
-		var filePath = isDebug ? config.path.src : config.path.dist
+		var filePath = isDebug ? 'src/' : config.path.dist
 		var tags = []
 		tags.push('<script src="' + hostPath + filePath + 'loader.js?'+ version+'"></script>')
 
@@ -17,7 +17,7 @@ module.exports = function(config){
 	}
 	function loadSingleJS(fileList, opts){
 		opts = opts || {}
-		var filePath = isDebug ? config.path.src : config.path.dist
+		var filePath = isDebug ? 'src/' : config.path.dist
 		var tags = []
 
 		fileList.map(function(v){
