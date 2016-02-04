@@ -7,10 +7,10 @@ module.exports = function(config){
 	function load(){
 		var filePath = isDebug ? config.path.src : config.path.dist
 		var tags = []
-		tags.push('<script src="' + hostPath + filePath + '/' + 'loader.js?'+ version+'"></script>')
+		tags.push('<script src="' + hostPath + filePath + 'loader.js?'+ version+'"></script>')
 
 		config.depends.global && config.depends.global.map(function(v){
-			tags.push('<script src="' + hostPath + filePath + '/' + v +'.js?'+ version+'"></script>')	
+			tags.push('<script src="' + hostPath + filePath + v +'.js?'+ version+'"></script>')	
 		})
 
 		return tags.join('')
@@ -21,7 +21,7 @@ module.exports = function(config){
 		var tags = []
 
 		fileList.map(function(v){
-			tags.push('<script src="' + hostPath + filePath + '/' + v +'.js?'+ version+'"></script>')	
+			tags.push('<script src="' + hostPath + filePath + v +'.js?'+ version+'"></script>')	
 		})
 
 		return tags.join('')
