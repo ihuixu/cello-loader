@@ -2,8 +2,6 @@ var UglifyJS = require("uglify-js");
 var defaults = require('./defaults')
 var defaultJS = defaults.defaultJS
 
-console.log(defaultJS.rem_screen)
-
 module.exports = function(config){
 	var hostPath = config.JCSTATIC_BASE
 	var isDebug = config.isDebug
@@ -56,9 +54,8 @@ module.exports = function(config){
 		var os = {}
 		var meta = '<meta name="viewport" content="width=device-width,' + (os.android ? 'target-densitydpi=device-dpi,' : ' ') + 'initial-scale=1.0,user-scalable=no">'
 
-		var jss = '<script type="text/javascript"> window.use_screen_base="' + (use_screen_base||640) + '"; </script>'
+		var jss = '<script type="text/javascript"> window.use_screen_base="' + (use_screen_base||640) + '_mate' + '";' + UglifyJS.minify(defaultJS.rem_screen, {fromString: true}).code + '</script>'
 
-		var content = UglifyJS.minify(jss, {fromString: true}).code
 
 		return meta + jss	
 	}
