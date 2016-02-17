@@ -1,7 +1,7 @@
 {
   "name": "cello-loader",
   "description": "cello-server loader",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xh1021/cello-loader.git"
@@ -12,5 +12,6 @@
   },
   "main": "loader.js",
   "dependencies": {
+    "uglify-js": "^2.6.1"
   }
 }
