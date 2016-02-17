@@ -2,7 +2,7 @@
 
 静态文件加载器
 
-### 用法 
+## 用法 
 ```
 {
 "JCSTATIC_BASE":"http://xhstatic.cello.com/",
@@ -16,9 +16,27 @@ var config = require('config/static.json')
 var loaderFn = loader(config)
 ```
 
+### js
+
+#### 初始化
 ```
 <%- loaderFn.load() %>
+```
 
-<%- loaderFn.loadJS(['a', 'page/flash/back'], {depends:['jquery']}) %>
+#### 引用js
+```
+<%- loaderFn.loadJS(['a', 'page/flash/back']) %>
+```
+
+### css 
+
+#### 引用css
+```
 <%- loaderFn.loadCSS(['cssresetm']) %>
 ```
+
+### rem布局
+```
+<%- loaderFn.loadRem() %>
+```
+
