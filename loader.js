@@ -1,3 +1,9 @@
+var UglifyJS = require("uglify-js");
+var defaults = require('./defaults')
+var defaultJS = defaults.defaultJS
+
+console.log(defaultJS.rem_screen)
+
 module.exports = function(config){
 	var hostPath = config.JCSTATIC_BASE
 	var isDebug = config.isDebug
@@ -30,7 +36,7 @@ module.exports = function(config){
 	function loadJS(fileList, opts){
 		opts = opts || {}
 		var jss = loadSingleJS(fileList, opts)
-		var runs = '<script>cello.runModules(' + JSON.stringify(fileList) + ');</script>'
+		var runs = '<script type="text/javascript">cello.runModules(' + JSON.stringify(fileList) + ');</script>'
 
 		return jss + runs 
 	}
@@ -46,11 +52,13 @@ module.exports = function(config){
 		return tags.join('')
 	}
 
-	function loadRem(screen_base){
+	function loadRem(use_screen_base){
 		var os = {}
-		var meta = '<meta name="viewport" content="width=device-width,' + (os.android ? 'target-densitydpi=device-dpi,' : ' ') + 'initial-scale=1,user-scalable=no">'
+		var meta = '<meta name="viewport" content="width=device-width,' + (os.android ? 'target-densitydpi=device-dpi,' : ' ') + 'initial-scale=1.0,user-scalable=no">'
 
-		var jss = '<script type="text/javascript"> window.screen_base="' + (screen_base||640) + '"; (function(a,b){var c="orientationchange"in b?"orientationchange":"resize",d=screen_base.indexOf("_mate"),e=parseInt(screen_base),f=a.documentElement,g=function(){var a=f.clientWidth,c=b.innerWidth;f.style.fontSize=100*(c/e)+"px"};if(/iPad.*OS|iPhone.*OS/.test(navigator.userAgent)&&d>0){var h=a.querySelectorAll("meta[name=viewport]"),i=b.devicePixelRatio;i=i!=1?2:1,h[0]&&h[0].setAttribute("content","width=device-width, user-scalable=no, minimum-scale="+1/i+", maximum-scale="+1/i+", initial-scale="+1/i)}g(),b.addEventListener(c,g,!1),delete screen_base})(document,window); </script>'
+		var jss = '<script type="text/javascript"> window.use_screen_base="' + (use_screen_base||640) + '"; </script>'
+
+		var content = UglifyJS.minify(jss, {fromString: true}).code
 
 		return meta + jss	
 	}
