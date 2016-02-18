@@ -24,7 +24,7 @@ module.exports = function(config){
 		var filePath = isDebug ? 'src/' : config.path.dist
 		var tags = []
 
-		fileList.map(function(v){
+		fileList && fileList.map(function(v){
 			tags.push('<script src="' + hostPath + filePath + v +'.js?'+ version+'"></script>')	
 		})
 
@@ -34,7 +34,7 @@ module.exports = function(config){
 	function loadJS(fileList, opts){
 		opts = opts || {}
 		var jss = loadSingleJS(fileList, opts)
-		var runs = '<script type="text/javascript">cello.runModules(' + JSON.stringify(fileList) + ');</script>'
+		var runs = fileList ? '<script type="text/javascript">cello.runModules(' + JSON.stringify(fileList) + ');</script>' : ''
 
 		return jss + runs 
 	}
@@ -43,7 +43,7 @@ module.exports = function(config){
 		opts = opts || {}
 		var filePath = 'css'
 		var tags = []
-		fileList.map(function(v){
+		fileList && fileList.map(function(v){
 			tags.push('<link rel="stylesheet" type="text/css" href="' + hostPath + filePath + '/' + v + '.css" />')
 		})
 
