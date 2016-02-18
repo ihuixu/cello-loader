@@ -54,11 +54,15 @@ module.exports = function(config){
 		var os = {}
 		var meta = '<meta name="viewport" content="width=device-width,' + (os.android ? 'target-densitydpi=device-dpi,' : ' ') + 'initial-scale=1.0,user-scalable=no">'
 
+		return meta + setRem(use_screen_base)	
+	}
+
+	function setRem(use_screen_base){
 		var jss = '<script type="text/javascript"> window.use_screen_base="' + (use_screen_base||640) + '_mate' + '";' + UglifyJS.minify(defaultJS.rem_screen, {fromString: true}).code + '</script>'
 
-
-		return meta + jss	
+		return jss	
 	}
+
 
 	return {
 		load : load 
@@ -66,6 +70,7 @@ module.exports = function(config){
 		, loadSingleJS : loadSingleJS
 		, loadCSS : loadCSS 
 		, loadRem : loadRem 
+		, setRem : setRem 
 	} 
 }
 
