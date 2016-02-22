@@ -6,7 +6,7 @@ module.exports = function(config){
 	var hostPath = config.JCSTATIC_BASE
 	var isDebug = config.isDebug
 	var now = new Date()
-	var version = [now.getFullYear(), now.getMonth()+1, now.getDay()].join('') + config.version
+	var version = [now.getFullYear(), (now.getMonth() <= 9 ? '0' : '') + (now.getMonth()+1), now.getDate()].join('') + config.version
 
 	function load(){
 		var filePath = isDebug ? 'src/' : config.path.dist
@@ -44,7 +44,7 @@ module.exports = function(config){
 		var filePath = 'css'
 		var tags = []
 		fileList && fileList.map(function(v){
-			tags.push('<link rel="stylesheet" type="text/css" href="' + hostPath + filePath + '/' + v + '.css" />')
+			tags.push('<link rel="stylesheet" type="text/css" href="' + hostPath + filePath + '/' + v + '.css?' + version + '" />')
 		})
 
 		return tags.join('')
@@ -58,7 +58,7 @@ module.exports = function(config){
 	}
 
 	function setRem(use_screen_base){
-		var jss = '<script type="text/javascript"> window.use_screen_base="' + (use_screen_base||640) + '_mate' + '";' + UglifyJS.minify(defaultJS.rem_screen, {fromString: true}).code + '</script>'
+		var jss = '<script type="text/javascript"> window.use_screen_base="' + (use_screen_base||750) + '_mate' + '";' + UglifyJS.minify(defaultJS.rem_screen, {fromString: true}).code + '</script>'
 
 		return jss	
 	}
