@@ -6,7 +6,7 @@ module.exports = function(config){
 	var hostPath = config.JCSTATIC_BASE
 	var isDebug = config.isDebug
 	var now = new Date()
-	var version = [now.getFullYear(), (now.getMonth() <= 9 ? '0' : '') + (now.getMonth()+1), now.getDate()].join('') + config.version
+	var version = [now.getFullYear(), (now.getMonth() <= 9 ? '0' : '') + (now.getMonth()+1), now.getDate()].join('') + '.' + config.version
 
 	function load(){
 		var filePath = isDebug ? 'src/' : config.path.dist
@@ -41,7 +41,7 @@ module.exports = function(config){
 
 	function loadCSS(fileList, opts){
 		opts = opts || {}
-		var filePath = 'css'
+		var filePath = isDebug ? 'less/' : config.path.css
 		var tags = []
 		fileList && fileList.map(function(v){
 			tags.push('<link rel="stylesheet" type="text/css" href="' + hostPath + filePath + '/' + v + '.css?' + version + '" />')
