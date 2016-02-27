@@ -41,7 +41,7 @@ module.exports = function(config){
 
 	function loadCSS(fileList, opts){
 		opts = opts || {}
-		var filePath = isDebug ? 'less/' : config.path.css
+		var filePath = isDebug ? 'less' : 'css'
 		var tags = []
 		fileList && fileList.map(function(v){
 			tags.push('<link rel="stylesheet" type="text/css" href="' + hostPath + filePath + '/' + v + '.css?' + version + '" />')
