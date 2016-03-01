@@ -50,9 +50,9 @@ module.exports = function(config){
 		return tags.join('')
 	}
 
-	function loadRem(use_screen_base){
-		var os = {}
-		var meta = '<meta name="viewport" content="width=device-width,' + (os.android ? 'target-densitydpi=device-dpi,' : ' ') + 'initial-scale=1.0,user-scalable=no">'
+	function loadRem(os, use_screen_base){
+		var os = os || {}
+		var meta = '<meta name="viewport" content="width=device-width, ' + (os.android && parseInt(os.osVersion) < 4 ? 'target-densitydpi=device-dpi,' : '')  + ' initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">'
 
 		return meta + setRem(use_screen_base)	
 	}
