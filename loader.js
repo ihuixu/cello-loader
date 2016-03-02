@@ -34,7 +34,7 @@ module.exports = function(config){
 	function loadJS(fileList, opts){
 		opts = opts || {}
 		var jss = loadSingleJS(fileList, opts)
-		var runs = fileList ? '<script type="text/javascript">cello.runModules(' + JSON.stringify(fileList) + ');</script>' : ''
+		var runs = fileList ? '<script type="text/javascript">fml.runModules(' + JSON.stringify(fileList) + ');</script>' : ''
 
 		return jss + runs 
 	}
