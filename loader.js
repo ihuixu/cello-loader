@@ -18,7 +18,16 @@ module.exports = function(config){
 				modNames.push(v)
 			})
 		}
-		tags.push('<script src="' + hostPath + filePath + modNames.join('+') +'.js?'+ version+'"></script>')	
+
+		if(isDebug){
+			modNames.map(function(v){
+				tags.push('<script src="' + hostPath + filePath + v +'.js?'+ version+'"></script>')	
+			})
+
+		}else{
+			tags.push('<script src="' + hostPath + filePath + modNames.join('+') +'.js?'+ version+'"></script>')	
+
+		}
 
 		return tags.join('')
 	}
