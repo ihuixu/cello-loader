@@ -19,15 +19,14 @@ module.exports = function(config){
 			})
 		}
 
-		if(isDebug){
+//		if(isDebug){
 			modNames.map(function(v){
 				tags.push('<script src="' + hostPath + filePath + v +'.js?'+ version+'"></script>')	
 			})
 
-		}else{
-			tags.push('<script src="' + hostPath + filePath + modNames.join('+') +'.js?'+ version+'"></script>')	
-
-		}
+//		}else{
+//			tags.push('<script src="' + hostPath + filePath + modNames.join('+') +'.js?'+ version+'"></script>')	
+//		}
 
 		return tags.join('')
 	}
