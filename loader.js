@@ -13,20 +13,21 @@ module.exports = function(config){
 		var tags = []
 		var modNames = ['loader']
 
-		if(config.depends.global && config.depends.global.length){
-			config.depends.global.map(function(v){
-				modNames.push(v)
-			})
+		if(config.depends.global){
+			if(isDebug){
+				var globals = (config.depends.global).split('+')
+				globals.map(function(v){
+					modNames.push(v)
+				})
+
+			}else{
+				modNames.push(config.depends.global)
+			}
 		}
 
-//		if(isDebug){
-			modNames.map(function(v){
-				tags.push('<script src="' + hostPath + filePath + v +'.js?'+ version+'"></script>')	
-			})
-
-//		}else{
-//			tags.push('<script src="' + hostPath + filePath + modNames.join('+') +'.js?'+ version+'"></script>')	
-//		}
+		modNames.map(function(v){
+			tags.push('<script src="' + hostPath + filePath + v +'.js?'+ version+'"></script>')	
+		})
 
 		return tags.join('')
 	}
