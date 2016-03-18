@@ -11,11 +11,14 @@ module.exports = function(config){
 	function load(){
 		var filePath = isDebug ? 'src/' : config.path.dist
 		var tags = []
-		tags.push('<script src="' + hostPath + filePath + 'loader.js?'+ version+'"></script>')
+		var modNames = ['loader']
 
-		config.depends.global && config.depends.global.map(function(v){
-			tags.push('<script src="' + hostPath + filePath + v +'.js?'+ version+'"></script>')	
-		})
+		if(config.depends.global && config.depends.global.length){
+			config.depends.global.map(function(v){
+				modNames.push(v)
+			})
+		}
+		tags.push('<script src="' + hostPath + filePath + modNames.join('+') +'.js?'+ version+'"></script>')	
 
 		return tags.join('')
 	}
