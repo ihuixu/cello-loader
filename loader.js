@@ -15,9 +15,9 @@ module.exports = function(config){
 		var modNames = ['loader']
 		var dependsStr = config.depends.global || ''
 
-//		if(os.weixinBrowser){
+		if(os.weixinBrowser){
 			dependsStr += '+' + config.depends.weixin || ''
-//		}
+		}
 
 		if(isDebug){
 			var dependsArray = dependsStr.split('+')
