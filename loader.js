@@ -13,21 +13,20 @@ module.exports = function(config){
 		var filePath = isDebug ? 'src/' : config.path.dist
 		var tags = []
 		var modNames = ['loader']
+		var dependsStr = config.depends.global || ''
 
-		if(config.depends.global){
-			if(isDebug){
-				var globals = (config.depends.global).split('+')
-				globals.map(function(v){
-					modNames.push(v)
-				})
+//		if(os.weixinBrowser){
+			dependsStr += '+' + config.depends.weixin || ''
+//		}
 
-			}else{
-				modNames.push(config.depends.global)
-			}
-		}
+		if(isDebug){
+			var dependsArray = dependsStr.split('+')
+			dependsArray.map(function(v){
+				modNames.push(v)
+			})
 
-		if(os.weixinBrowser){
-			config.depends.weixin && modNames.push(config.depends.weixin)
+		}else{
+			modNames.push(dependsStr)
 		}
 
 		modNames.map(function(v){
