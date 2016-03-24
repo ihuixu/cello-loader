@@ -26,10 +26,9 @@ module.exports = function(config){
 			}
 		}
 
-//		if(os.weixinBrowser){
+		if(os.weixinBrowser){
 			modNames.push(config.depends.weixin)
-//		}
-console.log(config.depends.weixin)
+		}
 
 		modNames.map(function(v){
 			tags.push('<script src="' + hostPath + filePath + v +'.js?'+ version+'"></script>')	
