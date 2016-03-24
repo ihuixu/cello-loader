@@ -8,7 +8,8 @@ module.exports = function(config){
 	var now = new Date()
 	var version = [now.getFullYear(), (now.getMonth() <= 9 ? '0' : '') + (now.getMonth()+1), now.getDate()].join('') + '.' + config.version
 
-	function load(){
+	function load(os){
+		os = os || {}
 		var filePath = isDebug ? 'src/' : config.path.dist
 		var tags = []
 		var modNames = ['loader']
@@ -24,6 +25,11 @@ module.exports = function(config){
 				modNames.push(config.depends.global)
 			}
 		}
+
+//		if(os.weixinBrowser){
+			modNames.push(config.depends.weixin)
+//		}
+console.log(config.depends.weixin)
 
 		modNames.map(function(v){
 			tags.push('<script src="' + hostPath + filePath + v +'.js?'+ version+'"></script>')	
@@ -63,7 +69,7 @@ module.exports = function(config){
 	}
 
 	function loadRem(os, use_screen_base){
-		var os = os || {}
+		os = os || {}
 		var meta = '<meta name="viewport" content="width=device-width, ' + (os.android && parseInt(os.osVersion) < 4 ? 'target-densitydpi=device-dpi,' : '')  + ' initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">'
 
 		return meta + setRem(use_screen_base)	
