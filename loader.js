@@ -27,7 +27,7 @@ module.exports = function(config){
 		}
 
 		if(os.weixinBrowser){
-			modNames.push(config.depends.weixin)
+			config.depends.weixin && modNames.push(config.depends.weixin)
 		}
 
 		modNames.map(function(v){
