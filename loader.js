@@ -16,7 +16,8 @@ module.exports = function(config){
 		var dependsStr = config.depends.global || ''
 
 		if(os.weixinBrowser){
-			dependsStr += '+' + config.depends.weixin || ''
+			if(config.depends.weixin)
+				dependsStr += '+' + config.depends.weixin
 		}
 
 		if(isDebug){
