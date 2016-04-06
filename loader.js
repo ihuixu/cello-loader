@@ -12,22 +12,16 @@ module.exports = function(config){
 		os = os || {}
 		var filePath = isDebug ? 'src/' : config.path.dist
 		var tags = []
-		var modNames = ['loader']
-		var dependsStr = config.depends.global || ''
-
-		if(os.weixinBrowser){
-			if(config.depends.weixin)
-				dependsStr += '+' + config.depends.weixin
-		}
+		var modNames = []
 
 		if(isDebug){
-			var dependsArray = dependsStr.split('+')
+			var dependsArray = config.depends.global.split('+')
 			dependsArray.map(function(v){
 				modNames.push(v)
 			})
 
 		}else{
-			modNames.push(dependsStr)
+			modNames.push(config.depends.global.replace(/\//g, '~'))
 		}
 
 		modNames.map(function(v){
