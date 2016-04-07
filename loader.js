@@ -12,7 +12,7 @@ module.exports = function(config){
 		os = os || {}
 		var filePath = isDebug ? 'src/' : config.path.dist
 		var tags = []
-		var modNames = []
+		var modNames = ['loader']
 
 		if(isDebug){
 			var dependsArray = config.depends.global.split('+')
