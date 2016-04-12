@@ -1,3 +1,4 @@
+var path = require('path')
 var UglifyJS = require("uglify-js");
 var defaults = require('./defaults')
 var defaultJS = defaults.defaultJS
@@ -25,7 +26,8 @@ module.exports = function(config){
 		}
 
 		modNames.map(function(v){
-			tags.push('<script src="' + hostPath + filePath + v +'.js?'+ version+'"></script>')	
+			var urlPath = path.join(filePath, v +'.js')
+			tags.push('<script src="' + hostPath + urlPath +'?'+ version+'"></script>')	
 		})
 
 		return tags.join('')
@@ -36,7 +38,8 @@ module.exports = function(config){
 		var tags = []
 
 		fileList && fileList.map(function(v){
-			tags.push('<script src="' + hostPath + filePath + v +'.js?'+ version+'"></script>')	
+			var urlPath = path.join(filePath, v +'.js')
+			tags.push('<script src="' + hostPath + urlPath +'?'+ version+'"></script>')	
 		})
 
 		return tags.join('')
@@ -55,7 +58,8 @@ module.exports = function(config){
 		var filePath = isDebug ? 'less' : 'css'
 		var tags = []
 		fileList && fileList.map(function(v){
-			tags.push('<link rel="stylesheet" type="text/css" href="' + hostPath + filePath + '/' + v + '.css?' + version + '" />')
+			var urlPath = path.join(filePath, v +'.css')
+			tags.push('<link rel="stylesheet" type="text/css" href="' + hostPath + urlPath + '?' + version + '" />')
 		})
 
 		return tags.join('')
