@@ -35,6 +35,12 @@ module.exports = function(config){
 	function loadSingleJS(fileList, opts){
 		opts = opts || {}
 		var filePath = isDebug ? 'src/' : config.path.dist
+
+		return getJSList(fileList, filePath, opts)
+	}
+
+	function getJSList(fileList, filePath, opts){
+		opts = opts || {}
 		var tags = []
 
 		fileList && fileList.map(function(v){
@@ -47,10 +53,19 @@ module.exports = function(config){
 
 	function loadJS(fileList, opts){
 		opts = opts || {}
-		var jss = loadSingleJS(fileList, opts)
+		var filePath = isDebug ? 'src/' : config.path.dist
+		var jss = getJSList(fileList, filePath, opts)
 		var runs = fileList ? '<script type="text/javascript">fml.runModules(' + JSON.stringify(fileList) + ');</script>' : ''
 
 		return jss + runs 
+	}
+
+	function openJS(fileList, opts){
+		opts = opts || {}
+		var filePath = isDebug ? 'open/' : config.path.open
+		var jss = getJSList(fileList, filePath, opts)
+
+		return jss 
 	}
 
 	function loadCSS(fileList, opts){
@@ -82,6 +97,7 @@ module.exports = function(config){
 	return {
 		load : load 
 		, loadJS : loadJS 
+		, openJS : openJS
 		, loadSingleJS : loadSingleJS
 		, loadCSS : loadCSS 
 		, loadRem : loadRem 
