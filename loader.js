@@ -1,4 +1,3 @@
-var path = require('path')
 var UglifyJS = require("uglify-js");
 var defaults = require('./defaults')
 var defaultJS = defaults.defaultJS
@@ -9,9 +8,13 @@ module.exports = function(config){
 	var now = new Date()
 	var version = [now.getFullYear(), (now.getMonth() <= 9 ? '0' : '') + (now.getMonth()+1), now.getDate()].join('') + '.' + config.version
 
+	var basePath = {
+		js : hostPath + (isDebug ? 'src' : config.path.dist) + '/'
+		, css : hostPath + (isDebug ? 'less' : 'css') + '/'
+	}
+
 	function load(os){
 		os = os || {}
-		var filePath = isDebug ? 'src/' : config.path.dist
 		var tags = []
 		var modNames = []
 
@@ -26,20 +29,23 @@ module.exports = function(config){
 		}
 
 		modNames.map(function(v){
-			var urlPath = path.join(filePath, v +'.js')
-			tags.push('<script src="' + hostPath + urlPath +'?'+ version+'"></script>')	
+			tags.push('<script src="' + basePath.js + v +'.js' +'?'+ version+'"></script>')	
 		})
 
 		return tags.join('')
 	}
 	function loadSingleJS(fileList, opts){
 		opts = opts || {}
-		var filePath = isDebug ? 'src/' : config.path.dist
+
+		return getJSList(fileList, basePath.js, opts)
+	}
+
+	function getJSList(fileList, filePath, opts){
+		opts = opts || {}
 		var tags = []
 
 		fileList && fileList.map(function(v){
-			var urlPath = path.join(filePath, v +'.js')
-			tags.push('<script src="' + hostPath + urlPath +'?'+ version+'"></script>')	
+			tags.push('<script src="' + filePath + v +'.js' +'?'+ version+'"></script>')	
 		})
 
 		return tags.join('')
@@ -47,19 +53,24 @@ module.exports = function(config){
 
 	function loadJS(fileList, opts){
 		opts = opts || {}
-		var jss = loadSingleJS(fileList, opts)
+		var jss = getJSList(fileList, basePath.js, opts)
 		var runs = fileList ? '<script type="text/javascript">fml.runModules(' + JSON.stringify(fileList) + ');</script>' : ''
 
 		return jss + runs 
 	}
 
+	function openJS(fileList, opts){
+		opts = opts || {}
+		var jss = getJSList(fileList, 'open', opts)
+
+		return jss 
+	}
+
 	function loadCSS(fileList, opts){
 		opts = opts || {}
-		var filePath = isDebug ? 'less' : 'css'
 		var tags = []
 		fileList && fileList.map(function(v){
-			var urlPath = path.join(filePath, v +'.css')
-			tags.push('<link rel="stylesheet" type="text/css" href="' + hostPath + urlPath + '?' + version + '" />')
+			tags.push('<link rel="stylesheet" type="text/css" href="' + basePath.css + v +'.css' + '?' + version + '" />')
 		})
 
 		return tags.join('')
@@ -82,10 +93,12 @@ module.exports = function(config){
 	return {
 		load : load 
 		, loadJS : loadJS 
+		, openJS : openJS
 		, loadSingleJS : loadSingleJS
 		, loadCSS : loadCSS 
 		, loadRem : loadRem 
 		, setRem : setRem 
+		, basePath : basePath
 	} 
 }
 
