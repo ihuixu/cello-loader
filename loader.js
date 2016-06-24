@@ -9,7 +9,8 @@ module.exports = function(config){
 	var version = [now.getFullYear(), (now.getMonth() <= 9 ? '0' : '') + (now.getMonth()+1), now.getDate()].join('') + '.' + config.version
 
 	var basePath = {
-		js : hostPath + (isDebug ? 'src' : config.path.dist) + '/'
+		host : hostPath
+		, js : hostPath + (isDebug ? 'src' : config.path.dist) + '/'
 		, css : hostPath + (isDebug ? 'less' : 'css') + '/'
 	}
 
