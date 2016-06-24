@@ -36,7 +36,6 @@ module.exports = function(config){
 	}
 	function loadSingleJS(fileList, opts){
 		opts = opts || {}
-
 		return getJSList(fileList, basePath.js, opts)
 	}
 
