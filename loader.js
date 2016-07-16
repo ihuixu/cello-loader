@@ -78,7 +78,7 @@ module.exports = function(config){
 
 	function loadRem(os, use_screen_base){
 		os = os || {}
-		var meta = '<meta name="viewport" content="width=device-width, ' + (os.android && parseInt(os.osVersion) < 4 ? 'target-densitydpi=device-dpi,' : '')  + ' initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">'
+		var meta = '<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">'
 
 		return meta + setRem(use_screen_base)	
 	}
