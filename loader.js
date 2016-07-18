@@ -8,8 +8,6 @@ module.exports = function(config){
 	var now = new Date()
 	var version = [now.getFullYear(), (now.getMonth() <= 9 ? '0' : '') + (now.getMonth()+1), now.getDate()].join('') + '.' + config.version
 
-	config.path || (config.path = {})
-
 	var basePath = {
 		host : hostPath
 		, js : hostPath + (isDebug ? 'src' : config.path.dist) + '/'
@@ -80,7 +78,7 @@ module.exports = function(config){
 
 	function loadRem(os, use_screen_base){
 		os = os || {}
-		var meta = '<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">'
+		var meta = '<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">'
 
 		return meta + setRem(use_screen_base)	
 	}
