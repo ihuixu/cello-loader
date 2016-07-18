@@ -8,6 +8,8 @@ module.exports = function(config){
 	var now = new Date()
 	var version = [now.getFullYear(), (now.getMonth() <= 9 ? '0' : '') + (now.getMonth()+1), now.getDate()].join('') + '.' + config.version
 
+	config.path || (config.path = {})
+
 	var basePath = {
 		host : hostPath
 		, js : hostPath + (isDebug ? 'src' : config.path.dist) + '/'
