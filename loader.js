@@ -3,6 +3,8 @@ var defaults = require('./defaults')
 var defaultJS = defaults.defaultJS
 
 module.exports = function(config){
+	config.path || (config.path = {})
+
 	var hostPath = config.JCSTATIC_BASE
 	var isDebug = config.isDebug
 	var now = new Date()
