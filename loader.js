@@ -1,6 +1,7 @@
 var UglifyJS = require("uglify-js");
 var defaults = require('./defaults')
 var defaultJS = defaults.defaultJS
+var crypto = require('crypto')
 
 module.exports = function(config){
 	config.path || (config.path = {})
@@ -28,7 +29,16 @@ module.exports = function(config){
 			})
 
 		}else{
-			modNames.push(config.depends.global.replace(/\//g, '~'))
+
+			var filename = config.depends.global
+			var hasher = crypto.createHash("md5");
+			hasher.update(filename)
+			var hashmsg = hasher.digest('hex')
+
+			console.log(filename, hashmsg, 'loader!!!!')
+
+			modNames.push(hashmsg)
+			//modNames.push(config.depends.global.replace(/\//g, '~'))
 		}
 
 		modNames.map(function(v){
@@ -58,6 +68,7 @@ module.exports = function(config){
 		var jss = getJSList(fileList, basePath.js, opts)
 		var runs = fileList ? '<script type="text/javascript">fml.runModules(' + JSON.stringify(fileList) + ');</script>' : ''
 
+		console.log(jss)
 		return jss + runs 
 	}
 
