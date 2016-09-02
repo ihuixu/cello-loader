@@ -1,7 +1,7 @@
 {
   "name": "cello-loader",
   "description": "cello-server loader",
-  "version": "0.0.58",
+  "version": "0.0.59",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ihuixu/cello-loader.git"
