@@ -35,7 +35,7 @@ module.exports = function(config){
 			hasher.update(filename)
 			var hashmsg = hasher.digest('hex')
 
-			console.log(filename, hashmsg, 'loader!!!!')
+			//console.log(filename, hashmsg, 'loader!!!!')
 
 			modNames.push(hashmsg)
 			//modNames.push(config.depends.global.replace(/\//g, '~'))
@@ -68,7 +68,7 @@ module.exports = function(config){
 		var jss = getJSList(fileList, basePath.js, opts)
 		var runs = fileList ? '<script type="text/javascript">fml.runModules(' + JSON.stringify(fileList) + ');</script>' : ''
 
-		console.log(jss)
+		//console.log(jss)
 		return jss + runs 
 	}
 
